@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Digitalización 4º ESO - Apuntes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f141b; --panel:#141a22; --text:#e6edf3; --muted:#9aa6b2;
+      --brand:#4db6ff; --brand-700:#1e90ff; --shadow:0 10px 30px rgba(0,0,0,0.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);
+      font-family:'Roboto',sans-serif;line-height:1.6}
+    h1,h2,h3,h4{font-family:'Poppins',sans-serif;margin:0 0 16px;line-height:1.3;text-align:center}
+    h1{font-size:3rem} h2{font-size:2rem;margin-top:0}
+    p{margin:0 0 20px;color:var(--muted);font-size:1.05rem;text-align:center}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{color:var(--brand-700)}
+    .navbar{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;
+      padding:20px 30px;background:rgba(15,20,27,0.9);backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(255,255,255,0.08);z-index:100}
+    .brand{font-weight:700;font-size:1.2rem}
+    .nav-links{list-style:none;display:flex;gap:24px;margin:0;padding:0}
+    .nav-links a{padding:10px 14px;border-radius:10px;font-weight:500;cursor:pointer}
+    .nav-links a.active,.nav-links a:hover{background:rgba(255,255,255,0.06)}
+    .nav-toggle{display:none}
+
+    /* Sistema de pestañas: solo se muestra la sección activa */
+    section{display:none}
+    section.active{display:block}
+
+    /* Hero solo visible cuando está activa */
+    .hero{display:none;min-height:100vh;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+    .hero.active{display:flex}
+
+    .fog{position:absolute;inset:0;
+      background:radial-gradient(circle at 20% 40%, rgba(255,255,255,0.08), transparent 60%),
+                 radial-gradient(circle at 80% 60%, rgba(255,255,255,0.06), transparent 60%);
+      animation:fog 20s infinite alternate;}
+    @keyframes fog{from{transform:translateX(-20px);}to{transform:translateX(20px);}}
+    .hero-content{position:relative;z-index:1;max-width:800px;padding:20px;margin:auto}
+    .btn{display:inline-block;padding:14px 22px;border-radius:14px;font-weight:600;margin:10px;font-size:1rem;cursor:pointer}
+    .btn-primary{background:var(--brand);color:#09121b}
+    .btn-primary:hover{background:var(--brand-700);box-shadow:var(--shadow)}
+    .container{max-width:1200px;margin:0 auto;padding:60px 30px}
+    .cards{display:grid;gap:28px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);
+      padding:28px;transition:.25s}
+    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(77,182,255,0.35)}
+    .card.locked{opacity:0.4;position:relative;pointer-events:none}
+    .card.locked::after{content:"🔒";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2rem}
+    .pdf-viewer{margin-top:15px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden}
+    .pdf-viewer embed{width:100%;height:300px}
+    footer{border-top:1px solid rgba(255,255,255,0.08);padding:30px;text-align:center;margin-top:60px;font-size:.9rem;color:var(--muted)}
+    @media(max-width:760px){
+      .nav-toggle{display:block;width:40px;height:40px;background:#0b1117;border:1px solid rgba(255,255,255,0.18);color:#fff}
+      .nav-links{display:none;position:absolute;right:20px;top:70px;background:#0b1117;padding:16px;
+        border-radius:12px;flex-direction:column;gap:12px}
+      .nav-links.open{display:flex}
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a class="brand" href="#">Alejandro Otero</a>
+    <button class="nav-toggle" aria-label="Abrir menú">☰</button>
+    <ul class="nav-links" role="tablist">
+      <li><a href="#" class="active" data-tab="inicio" role="tab" aria-selected="true">Inicio</a></li>
+      <li><a href="#" data-tab="unidades" role="tab" aria-selected="false">Unidades</a></li>
+      <li><a href="#" data-tab="actividades" role="tab" aria-selected="false">Actividades</a></li>
+      <li><a href="#" data-tab="ejercicios" role="tab" aria-selected="false">Ejercicios HTML</a></li>
+      <li><a href="#" data-tab="contacto" role="tab" aria-selected="false">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- INICIO -->
+  <section id="inicio" class="hero active" role="tabpanel" aria-labelledby="tab-inicio">
+    <div class="fog"></div>
+    <div class="hero-content">
+      <h1>Digitalización 4º ESO</h1>
+      <p><strong>Alejandro Otero Collantes</strong></p>
+    </div>
+  </section>
+
+  <!-- UNIDADES -->
+ <section id="unidades" class="container">
+  <h2>Unidades</h2>
+  <div class="cards">
+    <article class="card">
+      <h4>Unidad 1: Arquitectura de Ordenadores</h4>
+      <div class="pdf-viewer" style="text-align:center;">
+        <a href="DOCUMENTOS/Unidad1.PDF" download class="pdf-btn">📄 Descargar Unidad 1</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h4>Unidad 2: Sistemas Operativos</h4>
+      <div class="pdf-viewer" style="text-align:center;">
+        <a href="DOCUMENTOS/Unidad2.PDF" download class="pdf-btn">📄 Descargar Unidad 2</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h4>Unidad 3: Comunicaciones y Redes</h4>
+      <div class="pdf-viewer" style="text-align:center;">
+        <a href="DOCUMENTOS/Unidad3.PDF" download class="pdf-btn">📄 Descargar Unidad 3</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h4>Unidad 4: Gestión de Documentos</h4>
+      <div class="pdf-viewer" style="text-align:center;">
+        <a href="DOCUMENTOS/Unidad4.PDF" download class="pdf-btn">📄 Descargar Unidad 4</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h4>Unidad 5: Contenido Multimedia</h4>
+      <div class="pdf-viewer" style="text-align:center;">
+        <a href="DOCUMENTOS/Unidad5.PDF" download class="pdf-btn">📄 Descargar Unidad 5</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h4>Unidad 6: Creación de Aplicaciones</h4>
+      <div class="pdf-viewer" style="text-align:center;">
+        <a href="DOCUMENTOS/Unidad6.PDF" download class="pdf-btn">📄 Descargar Unidad 6</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h4>Unidad 7: Seguridad en la Red</h4>
+      <div class="pdf-viewer" style="text-align:center;">
+        <a href="DOCUMENTOS/Unidad7.PDF" download class="pdf-btn">📄 Descargar Unidad 7</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h4>Unidad 8: Ética y Hábitos Saludables</h4>
+      <div class="pdf-viewer" style="text-align:center;">
+        <a href="DOCUMENTOS/Unidad8.PDF" download class="pdf-btn">📄 Descargar Unidad 8</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    justify-content: center; /* centra la última fila */
+  }
+
+  .card {
+    background: var(--panel, #141a22);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px;
+    transition: 0.3s;
+    text-align: center;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(30,144,255,0.25); /* sombra azul sutil */
+    border-color: rgba(77,182,255,0.35);
+  }
+
+  .pdf-btn {
+    display:inline-block;
+    padding:10px 16px;
+    background:#4db6ff;
+    color:#09121b;
+    border-radius:8px;
+    font-weight:600;
+    text-decoration:none;
+    transition:0.3s;
+  }
+
+  .pdf-btn:hover {
+    background:#1e90ff;
+    color:white;
+    box-shadow: 0 4px 12px rgba(30,144,255,0.4); /* sombra azul en hover */
+  }
+</style>
+
+
+
+  <!-- ACTIVIDADES -->
+  <section id="actividades" class="container">
+  <h2>Actividades</h2>
+  <div class="cards">
+    <!-- Unidad 1 -->
+    <article class="card">
+      <h4>Unidad 1: Arquitectura de Ordenadores</h4>
+      <ul class="actividad-lista">
+        <li>
+          <a href="ACTIVIDADES/Actividad 02 (1).docx" download class="actividad-link">
+            📝 Actividad 02: Microprocesadores
+          </a>
+        </li>
+        <li>
+          <a href="ACTIVIDADES/Actividad 03.pdf" download class="actividad-link">
+            📝 Actividad 03: Placa base
+          </a>
+        </li>
+        <li>
+          <a href="ACTIVIDADES/Actividad04.docx" download class="actividad-link">
+            📝 Actividad 04: Memoria RAM y conectores
+          </a>
+        </li>
+        <li>
+          <a href="ACTIVIDADES/Actividad 5 - Hoja 1.pdf" download class="actividad-link">
+            📝 Actividad 05: Sistema de numeración binario-decimal
+          </a>
+        </li>
+      </ul>
+    </article>
+
+    <!-- Unidades bloqueadas -->
+    <article class="card locked">
+      <h4>Unidad 2: Sistemas Operativos</h4>
+      <p> Actividades disponibles próximamente</p>
+    </article>
+
+    <article class="card locked">
+      <h4>Unidad 3: Comunicaciones y Redes</h4>
+      <p>  Actividades disponibles próximamente</p>
+    </article>
+
+    <article class="card locked">
+      <h4>Unidad 4: Gestión de Documentos</h4>
+      <p> Actividades disponibles próximamente</p>
+    </article>
+
+    <article class="card locked">
+      <h4>Unidad 5: Contenido Multimedia</h4>
+      <p> Actividades disponibles próximamente</p>
+    </article>
+
+    <article class="card locked">
+      <h4>Unidad 6: Creación de Aplicaciones</h4>
+      <p> Actividades disponibles próximamente</p>
+    </article>
+
+    <article class="card locked">
+      <h4>Unidad 7: Seguridad en la Red</h4>
+      <p> Actividades disponibles próximamente</p>
+    </article>
+
+    <article class="card locked">
+      <h4>Unidad 8: Ética y Hábitos Saludables</h4>
+      <p> Actividades disponibles próximamente</p>
+    </article>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    gap: 28px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    justify-content: center;
+  }
+
+  .card {
+    background: #141a22;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px;
+    transition: 0.3s;
+    text-align: center;
+    color: #e6edf3;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(30,144,255,0.25);
+    border-color: rgba(77,182,255,0.35);
+  }
+
+  .actividad-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+
+  .actividad-lista li {
+    margin: 8px 0;
+  }
+
+  .actividad-link {
+    display: block;
+    padding: 8px 12px;
+    background: rgba(77,182,255,0.1);
+    border-radius: 6px;
+    color: #e6edf3;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .actividad-link:hover {
+    background: rgba(77,182,255,0.25);
+    color: #fff;
+  }
+
+  .card.locked {
+    opacity: 0.5;
+    color: #aaa;
+    background: #1a1f27;
+    position: relative;
+    pointer-events: none;
+  }
+
+  .card.locked::after {
+    content: "🔒";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    opacity: 0.8;
+  }
+</style>
+
+
+  <!-- EJERCICIOS HTML -->
+  <section id="ejercicios" class="container" role="tabpanel" aria-labelledby="tab-ejercicios">
+    <h2>Ejercicios HTML</h2>
+    <p>Aquí irán los ejercicios prácticos.</p>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="container" role="tabpanel" aria-labelledby="tab-contacto">
+    <h2>Contacto</h2>
+    <p>Puedes escribirme a: <a href="mailto:alejandro.otero@alumno.fomento.edu">alejandro.otero@alumno.fomento.edu</a></p>
+  </section>
+
+  <footer>
+    © 2025 Digitalización 4º ESO - Estos apuntes son de libre uso, posibilidad de compartir y utilizar sin restricciones
+  </footer>
+
+  <script>
+    // JS sencillo y robusto: sin DOMContentLoaded (el script está al final)
+    const links = document.querySelectorAll(".nav-links a[data-tab]");
+    const sections = document.querySelectorAll("section");
+    const toggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    function showSection(tabId) {
+      // Cambia sección activa
+      sections.forEach(s => s.classList.toggle("active", s.id === tabId));
+      // Marca link activo y accesibilidad
+      links.forEach(l => {
+        const isActive = l.getAttribute("data-tab") === tabId;
+        l.classList.toggle("active", isActive);
+        l.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+    }
+
+    // Eventos de los tabs
+    links.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault(); // evita salto por href="#"
+        const tab = link.getAttribute("data-tab");
+        showSection(tab);
+        navLinks.classList.remove("open"); // cierra menú móvil al seleccionar
+      });
+    });
+
+    // Toggle menú móvil
+    if (toggle) {
+      toggle.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+      });
+    }
+
+    // Estado inicial: muestra el tab marcado como activo en la barra
+    const initialTab =
+      document.querySelector(".nav-links a.active")?.getAttribute("data-tab") ||
+      sections[0]?.id ||
+      "inicio";
+    showSection(initialTab);
+  </script>
+</body>
+</html>
